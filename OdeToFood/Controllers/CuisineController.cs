@@ -14,10 +14,22 @@ namespace OdeToFood.Controllers
             return View();
         }
 
-        public ActionResult Search(string name)
+        [HttpPost]
+        public ActionResult Search(string name = "french")
         {
-            var mess = Server.HtmlEncode(name);
-            return Content("This is the Search Action for " + mess);
+            var message = Server.HtmlEncode(name);
+            //return Content("This is the Search Action for " + mess);
+            //return RedirectToAction("Index", "Home", new { name = name });
+            //return RedirectToRoute("Default", new { controller = "Home", action = "Index" });
+            //return File(Server.MapPath("~/Content/site.css"), "text.css");
+            return Json(new { Message = message, Name = "Nick" }, JsonRequestBehavior.AllowGet);
+
+        }
+
+        [HttpGet]
+        public ActionResult Search()
+        {
+            return Json(new { Message = message, Name = "Nick" }, JsonRequestBehavior.AllowGet);
         }
     }
 }
